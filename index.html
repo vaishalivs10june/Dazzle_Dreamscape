@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dazzle DreamScape Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 2;
+            color: #333;
+            background: #ea00ff;
+        }
+
+        header {
+            color: #ffffff;
+            animation: fadeIn 1s ease-in;
+        }
+
+        header nav {
+            position: fixed;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            line-height: 1rem;
+            background-image: url("bg.jpeg");
+            width: 100%;
+            align-items: center;
+            
+        }
+        .logo img{
+            justify-items: flex-start;
+            max-width: 10rem;
+            padding-left: 1rem;
+            padding-top: 0.5rem;
+
+        }
+        .navbar{
+            justify-content: center;
+            padding-left: 200px;
+        }
+        
+        .login{
+            margin-left: 200px;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Additional CSS for the sign-up form */
+        .signup-form, .logout-form{
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 500px;
+            height: 70%;
+            background-image: url("bg.jpeg");
+            color: white;
+            padding: 2rem;
+            transition: left 0.3s ease-in-out;
+            z-index: 10;
+        }
+
+        .signup-form.active,.logout-form.active {
+            top: 20%;
+            left: 30%;
+        }
+        .logout-form.active {
+            top: 13%;
+            left: 80%;
+            width: 250px;
+        }
+        .logout-form ul{
+            list-style: none;
+        }
+        #signup-form-inner input,
+        #signup-form-inner button {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #signup-form-inner h2{
+            margin-left: 180px;
+        }
+
+        #signup-form-inner button {
+            background: #f05f33;
+            width: 25%;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-left: 35%;
+        }
+
+        #signup-form-inner button:hover {
+            background: #fc3b01;
+            color: black;
+            font-weight: 700;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }   
+
+        .close-button:hover {
+            color: #ccc;
+        }
+
+
+        header nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            justify-content: center;
+        }
+
+        header nav a:hover, nav button:hover {
+            background: linear-gradient(to right, #d22def, #f602a5, #00ccff,  #00ffa6, #b2fe00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+            transform: translateY(5px);
+        }
+
+        #hero {
+            background: url('https://source.unsplash.com/1600x900/?creativity') no-repeat center center/cover;
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .tagline{
+            font-family: monospace;
+            color: #2b0134;
+            font-size: 35px;
+            font-weight: 900;
+        }
+
+        #lead-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(43, 2, 62, 0.881);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        #lead-form input, #lead-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #lead-form button {
+            padding: 1rem;
+            background: #f05f33;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #lead-form button:hover {
+            background: #fc3b01;
+            color: black;
+            font-weight: 700;
+        }
+        .success-message {
+            display: none;
+            margin-top: 1rem;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            font-size: large;
+        }
+
+        section {
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: #fff;
+            margin-bottom: 1rem;
+            background: rgba(43, 2, 62, 0.881);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            animation: slideInLeft 1s ease-in;
+        }
+
+        .service, .testimonial {
+            flex: 1 1 30%;
+            margin: 1rem;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 100s;
+            background-image: url("bg.jpeg");
+            background-size: contain;
+            color: #ffffff;
+            min-width: 45%;
+            box-sizing: border-box;
+        }
+        
+        .testimonials, .services {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .testimonials-inner, .services-inner {
+            display: flex;
+            transition: 1s;
+        }
+
+        .testimonial img{
+            border-radius: 50%;
+        }
+
+        
+        .service:hover, .testimonial:hover {
+            transform: translateY(-10px);
+        }
+
+        
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+        
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        footer nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        footer nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer nav a:hover, .social-media i:hover {
+            background: linear-gradient(to right, #8c01fe, #1404f4, #f407dd, #c7716c, #1aea69, #00feae);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .services, .testimonials {
+                flex-direction: column;
+            }
+
+            header nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="" >
+            </div>
+            <div class="navbar">
+            <a href="#hero" class="nav-link" aria-current="page">Home</a>
+            <a href="#about" class="nav-link" aria-current="page">About Us</a>
+            <a href="#services" class="nav-link" aria-current="page">Services</a>
+            <a href="#testimonials" class="nav-link" aria-current="page">Testimonials</a>
+            <a href="#contact" class="nav-link" aria-current="page">Contact Us</a>
+            </div>
+            <button class="login" id="login-button">
+                <i class="fa fa-user-circle-o" style="font-size: 36px;"></i>
+                <div id="login-text">Sign up</div>
+            </button>
+            
+                
+            
+        </nav>
+    </header>
+    
+
+    <div id="signup-form" class="signup-form">
+        <button id="close-signup" class="close-button">&times;</button>
+        <form id="signup-form-inner">
+            <h2>Sign Up</h2>
+            <input type="text" id="signup-name" placeholder="Name" required>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+            <p>Already have a account ? <a href="#">Login here</a> </p>
+
+        </form>
+    </div>
+    <div id="logout-form" class="logout-form">
+        <button id="close-logout" class="close-button">&times;</button>
+        <form id="logout-form-inner">
+            <i class="fa fa-user-circle-o" style="font-size: 36px;"></i>
+            <ul>
+                <li>Your Profile</li>
+                <li>Your Services</li>
+                <li>Query</li>
+                <li>Help</li>
+                <li><button type="submit" id="logout-button">Logout</button></li>
+            </ul>
+
+        </form>
+    </div>
+
+
+    <section id="hero">
+        <h1>Welcome to Dazzle DreamScapes Agency</h1>
+        <h2 class="tagline">Elevating Brands to New Heights</h2>
+        <p>We bring your ideas to life with our creative solutions.</p>
+        <div id="lead-form">
+            <h2>Enquire Here</h2>
+            <form id="lead-form-inner">
+                <input type="text" id="name" placeholder="Name" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <textarea id="message" placeholder="Message" required></textarea>
+                <button type="submit">Request A Call</button>
+            </form>
+            <div id="success-message" class="success-message">Thank you! We will shortly contact you</div>
+        </div>
+    </section>
+    
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Dazzle Dreamscape Agency is a collective of passionate designers, developers, marketers, and storytellers dedicated to elevating brands to new heights. Our team brings together diverse expertise and a shared commitment to excellence, ensuring every project we undertake is executed with precision and creativity.Specializing in innovative design, immersive storytelling, and strategic brand development, we help businesses stand out and make a lasting impact.</p>
+    </section>
+    <section id="about">
+        <h2>Our Mission</h2>
+        <p>Our mission is simple: to bring your dreams to life. We believe that every brand has a unique story to tell, and it’s our job to tell it in the most compelling way possible. By combining cutting-edge design, innovative technology, and strategic insights, we create memorable experiences that resonate with audiences and drive results.</p>
+    </section>
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services">
+            <button class="slider-button prev" onclick="slideServices(-1)">&#10094;</button>
+                <div class="services-inner">
+                    <div class="service">
+                        <h3>Brand Identity & Strategy</h3>
+                        <ul>
+                            <li>Brand Development : <span>Creating compelling brand identities that captivate and resonate with target audiences.</span></li>
+                            <li>Brand Strategy : <span>Crafting strategic roadmaps that align brand goals with market opportunities.</span></li>
+                            <li>Logo Design : <span>Designing distinctive logos that embody the essence of a brand.</span></li>
+                        </ul>
+                    </div>
+                    <div class="service">
+                        <h3>Digital Marketing</h3>
+                        <ul>
+                            <li>Social Media Management :  <span>Developing and managing dynamic social media campaigns that engage and grow communities.</span></li>
+                            <li>SEO & SEM : <span>Enhancing online visibility through expert search engine optimization and targeted paid search campaigns.</span></li>
+                            <li>Content Creation : <span> Producing high-quality content, including blogs, videos, and graphics, to inform and engage audiences.</span></li>
+                        </ul>
+                    </div>
+                    <div class="service">
+                        <h3>Web Design & Development</h3>
+                        <ul>
+                            <li>Website Design : <span>Building visually stunning and user-friendly websites that reflect the brand's identity.</span></li>
+                            <li>E-commerce Solutions : <span>Creating seamless e-commerce platforms that enhance the shopping experience and drive sales.</span></li>
+                            <li>UI/UX Design : <span>Ensuring optimal user experiences with intuitive interfaces and user journey mapping.</span></li>
+                        </ul>
+                    </div>
+                    <div class="service">
+                        <h3>Graphic Design</h3>
+                        <ul>
+                            <li>Print Design : <span>Crafting eye-catching brochures, flyers, and posters that leave a lasting impression.</span></li>
+                            <li>Packaging Design : <span> Designing attractive and functional packaging that stands out on shelves.</span></li>
+                            <li>Illustration & Animation : <span>Producing custom illustrations and animations to add a creative touch to marketing materials.</span></li>
+                        </ul>
+                    </div>
+                    <div class="service">
+                        <h3>Video Production</h3>
+                        <ul>
+                            <li>Commercial Promotion : <span>Creating compelling video content that tells the brand story and promotes products/services.</span></li>
+                            <li>Corporate Videos : <span>Producing professional videos for internal communications, training, and events.</span></li>
+                            <li>Animation & Motion Graphics : <span>Developing engaging animations and motion graphics to enhance visual storytelling.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            <button class="slider-button next" onclick="slideServices(1)">&#10095;</button>
+        </div>
+    </section>
+    
+    <section id="testimonials">
+        <h2>Client Testimonials</h2>
+        <div class="testimonials">
+            <button class="slider-button prev" onclick="slideTestimonials(-1)">&#10094;</button>
+            <div class="testimonials-inner">
+                <div class="testimonial">
+                    <img src="Cl-1.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+
+                    </div>
+                    <p>"Working with Dazzle Dreamscape has been an absolute pleasure. They transformed our outdated website into a modern masterpiece that perfectly reflects our brand. Their attention to detail and creative approach exceeded our expectations!" - Laura</p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-2.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+
+                    </div>
+                    <p>"Dazzle Dreamscape's design team is exceptional. They captured the essence of our company's vision and translated it into stunning visuals. The entire process was smooth, and their commitment to quality is evident in every pixel." - Alex </p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-3.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+
+                    </div>
+                    <p>"Choosing Dazzle Dreamscape was the best decision we made for our digital presence. Their expertise in web design and development is unmatched. Our new website not only looks incredible but also functions seamlessly. Highly recommend their services!" - Kritka </p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-4.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+
+                    </div>
+                    <p>"Dazzle Dreamscape helped us stand out in a competitive market with their innovative approach to branding. From logo design to digital marketing strategies, they provided tailored solutions that have significantly boosted our online presence and customer engagement." - Jas </p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-5.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+
+                    </div>
+                    <p>"I'm impressed by Dazzle Dreamscape's commitment to delivering results. They understood our business goals and created a user-friendly website that has generated positive feedback from our clients. Their professionalism and creativity set them apart." - Haulin </p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-6.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+
+                    </div>
+                    <p>"The team at Dazzle Dreamscape took our vision and brought it to life with their exceptional design skills. They were responsive, professional, and truly cared about our project's success. We couldn't be happier with the results!" - Lary </p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-7.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+
+                    </div>
+                    <p>"Dazzle Dreamscape's creative team is a powerhouse of innovation. They developed a unique branding strategy for us that has significantly increased our brand recognition and customer engagement. Their dedication to our project was outstanding." - Elly</p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-8.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+                        &#9734;
+
+                    </div>
+                    <p>"We approached Dazzle Dreamscape with a complex project, and they delivered beyond our expectations. Their ability to understand our needs and provide creative solutions was impressive. Our new website is a testament to their expertise and hard work." - Paul</p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-9.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+
+                    </div>
+                    <p>"Dazzle Dreamscape has a knack for capturing the essence of a brand and turning it into a compelling online presence. Their design and development process was seamless, and the final product is a website that we are proud of. Highly recommended!" - Lina</p>
+                </div>
+                <div class="testimonial">
+                    <img src="Cl-10.jpg" width="100px" alt="">
+                    <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9734;
+                        &#9734;
+
+                    </div>
+                    <p>"The creativity and professionalism of Dazzle Dreamscape are unmatched. They revamped our entire digital strategy, resulting in a significant increase in our online visibility and customer interactions. Their passion for what they do shines through in their work." - Harry</p>
+                </div>
+            </div>
+            <button class="slider-button next" onclick="slideTestimonials(1)">&#10095;</button>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>&#9743;  (123) 456-7890</p>
+        <p>&#9993; info@dazzledreamscape.com</p>
+        <p>Follow us on social media:</p>
+        <div class="social-media">
+            <a href="#"><i class="fa fa-facebook-square fa-inverse" style="font-size:24px"></i></a>
+            
+            <a href="#"><i class="fa fa-twitter fa-inverse" style="font-size: 24px;"></i></a>
+            
+            <a href="#"><i class="fa fa-instagram fa-inverse" style="font-size:24px"></i></a>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Dazzle Dreamscape Agency. All rights reserved.</p>
+        <nav>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a>
+        </nav>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.getElementById('login-button');
+            const loginText = document.getElementById('login-text');
+            const signupForm = document.getElementById('signup-form');
+            const signupFormInner = document.getElementById('signup-form-inner');
+            const logoutForm = document.getElementById('logout-form');
+            const logoutFormInner = document.getElementById('logout-form-inner');
+            const closeSignupButton = document.getElementById('close-signup');
+            const closeLogoutButton = document.getElementById('close-logout');
+
+            // Retrieve the userName from localStorage
+    const storedUserName = localStorage.getItem('userName');
+                // Update login text if user is logged in
+    if (storedUserName) {
+        loginText.innerText = storedUserName;
+    }
+
+    // Event listener for login button to toggle forms
+    loginButton.addEventListener('click', () => {
+        if (storedUserName && loginText.innerText === storedUserName) {
+            // Toggle logout form if user is logged in
+            logoutForm.classList.toggle('active');
+            signupForm.classList.remove('active');
+        } else {
+            // Toggle signup form if user is not logged in
+            signupForm.classList.toggle('active');
+            logoutForm.classList.remove('active');
+        }
+    });
+
+    // Handle signup form submission
+    signupFormInner.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get the user's name
+        const userName = document.getElementById('signup-name').value;
+
+        // Store the user's name
+        localStorage.setItem('userName', userName);
+
+        // Update the login text
+        loginText.innerText = userName;
+
+        // Close the signup form and show the logout form
+        signupForm.classList.remove('active');
+        // logoutForm.classList.add('active');
+    });
+
+            
+
+                
+            // Handle closing the signup form
+            closeSignupButton.addEventListener('click', () => {
+                signupForm.classList.remove('active');
+            });
+
+            // Handle closing the signup form
+            closeLogoutButton.addEventListener('click', () => {
+                logoutForm.classList.remove('active');
+            });
+
+            // Handle logout form submission
+            logoutFormInner.addEventListener('submit', function(event) {
+                event.preventDefault();
+                localStorage.removeItem('userName'); // Remove username from localStorage
+                loginText.innerText = 'Log in'; // Reset login text
+                signupForm.classList.add('active')
+                logoutForm.classList.remove('active'); // Hide logout form
+            });
+
+            //lead form submission
+            document.getElementById('lead-form-inner').addEventListener('submit', function(event) {
+                event.preventDefault();
+                document.getElementById('success-message').style.display = 'block';
+            });
+            
+
+        });
+
+        let serviceIndex = 0;
+        function slideServices(direction) {
+            const servicesInner = document.querySelector('.services-inner');
+            const serviceCount = document.querySelectorAll('.service').length;
+            serviceIndex = (serviceIndex + direction + serviceCount) % serviceCount;
+            const offset = -serviceIndex * 50;
+            servicesInner.style.transform = `translateX(${offset}%)`;
+        }
+
+        let testimonialIndex = 0;
+        function slideTestimonials(direction) {
+            const testimonialsInner = document.querySelector('.testimonials-inner');
+            const testimonialCount = document.querySelectorAll('.testimonial').length;
+            testimonialIndex = (testimonialIndex + direction + testimonialCount) % testimonialCount;
+            const offset = -testimonialIndex * 50;
+            testimonialsInner.style.transform = `translateX(${offset}%)`;
+        }
+
+
+        
+    </script>
+    
+</body>
+</html>
